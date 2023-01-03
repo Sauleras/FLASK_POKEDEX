@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+</head>
+<body>
+    <div id="pokedex">
+        <h3>Number: {{pokemon.number}}</h3>
+        <h3>Name: {{pokemon.name}}</h3>
+        <h3>Height: {{pokemon.height}}</h3>
+        <h3>Weight: {{pokemon.weight}}</h3>
+        <img src="{{pokemon.sprite}}" alt="pokemon">
+    </div>
+    
+        <input type="hidden" value="{{pokemon.number}}" id="number">
+        <input type="text">
+        <button id="prox">Próximo</button>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/pokedex.js') }}"></script>
+</body>
+</html>
