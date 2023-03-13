@@ -7,15 +7,18 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def home():
 
-    if request.method == 'POST':
-        print(json.loads(request.data))
-        pokeId = json.loads(request.data)
-        pokeId = pokeId['id']
-        pokemon = pokeApi(pokeId)
-        return render_template("index.html", pokemon=pokemon)
-    else:
+    if request.method == 'GET':
         pokemon = pokeApi(1) 
         return render_template("index.html", pokemon=pokemon)
+
+    if request.method == 'POST':
+        print(json.loads(request.data))
+        pokeId = json.loads(request.data).get('idPoke')
+        pokemon = pokeApi(pokeId)
+        print(pokemon)
+        return jsonify({'data': pokemon})
+
+    return render_template("index.html")
 
 def pokeApi(idPoke):
     api = f'https://pokeapi.co/api/v2/pokemon/{idPoke}'
@@ -27,6 +30,7 @@ def pokeApi(idPoke):
         "name" : pokemon['name'],
         "height" : pokemon['height'],
         "weight" : pokemon['weight'],
+        "type" : pokemon['types'],
         "sprite" : pokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'],
     }
     
